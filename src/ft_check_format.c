@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/14 13:04:45 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:49:40 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int	check_digits(char *initial_map)
 	return (1);
 }
 
-void	print_map(struct matrix **map, int size)
+void	print_map(matrix_point **map, int size)
 {
 	int	i;
 	int	j;
@@ -175,11 +175,11 @@ void	print_map(struct matrix **map, int size)
 	return ;
 }
 
-matrix	**ft_check_format(int fd)
+matrix_map	*ft_check_format(int fd)
 {
 	char	*initial_map;
 	int	**int_map;
-	matrix	**map;
+	matrix_map	*map;
 	
 	get_map(fd, &initial_map);
 	if (!check_digits(initial_map) || !check_size(initial_map))
@@ -189,8 +189,8 @@ matrix	**ft_check_format(int fd)
 		return (free(initial_map), ft_free_array((void **)int_map), NULL);
 	map = ft_build_map(int_map, initial_map);
 	if (!map)
-		return (ft_free_array((void **)map), ft_free_array((void **)int_map), free(initial_map), NULL);
-	return (free(initial_map), ft_free_array((void **)map), ft_free_array((void **)int_map), map);
+		return (ft_free_array((void **)int_map), free(map), free(initial_map), NULL);
+	return (free(initial_map), ft_free_array((void **)int_map), map);
 }
 
 int	ft_check_ext(char *str)

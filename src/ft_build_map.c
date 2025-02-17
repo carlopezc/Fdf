@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:16:32 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/14 13:35:17 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:54:44 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,5 @@ matrix_map	*ft_build_map(int **int_map, char *initial_map)
 		return (NULL);
 	p_map->point = map;
 	print_map(map, columns);
-	return (p_map);
+	return (ft_free_array((void **)int_map), p_map);
 }

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/14 13:51:49 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:00:41 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 #include <fcntl.h>
 #include <stdlib.h>
-//#include <stdio.h>
 #include "../printf/ft_printf.h"
 #include <unistd.h>
 #include "../MLX42/include/MLX42/MLX42.h"
+#include <math.h>
 # define WIDTH 4480
 # define HEIGHT 2520
 
@@ -50,6 +50,7 @@ int	**ft_int_split(char *s, char c);
 char	*ft_substr(char *s, int start, int len);
 char	*ft_strdup(char *s);
 void	print_map(matrix_point **map, int size);
+void	ft_error_message(char *str);
 
 void	ft_free_array(void **arr);
 matrix_map	*ft_build_map(int **map, char *initial_map);

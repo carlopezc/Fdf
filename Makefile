@@ -6,7 +6,7 @@
 #    By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 15:49:58 by carlopez          #+#    #+#              #
-#    Updated: 2025/02/14 13:49:12 by carlopez         ###   ########.fr        #
+#    Updated: 2025/02/17 17:42:51 by carlopez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = fdf
 
 LIB = lib/fdf.h
 PRINTFDIR = printf
-MLXIDIR = MLX42
+MLXDIR = MLX42
 BUILD = $(MLXDIR)/build
 PRINTF = printf/libftprintf.a
 MAIN = main/main.c
@@ -43,7 +43,7 @@ all:
 
 $(NAME): $(MAIN) $(OBJ) $(PRINTF) $(MLX)
 	@echo "$(BOLD_CYAN)\nCompiling program...$(RESET)"
-	$(CC) $(CFLAGS) $(MLXFLAGS) $(MLX) $(MAIN) $(OBJ) $(PRINTF) -o $(NAME)
+	$(CC) $(CFLAGS) $(MLXFLAGS) $(MLX) $(MAIN) $(OBJ) $(PRINTF) $(MLX) -o $(NAME)
 	@echo "$(BOLD_CYAN)\n!Compilation completed, $(LIGHT_YELLOW)fdf🚀$(BOLD_CYAN) ready to be used!\n$(RESET)"
 
 %.o: %.c $(LIB) Makefile
@@ -54,26 +54,27 @@ $(PRINTF):
 	@echo "$(BOLD_PURPLE)\nCompiling printf...$(RESET)"
 	@$(MAKE) --silent -C $(PRINTFDIR)
 
-$(MLX): $(BUILD)
-	@$(MAKE) -C $(BUILD)
-
 $(BUILD):
-	@if [ ! -d "$(MLX_\DIR)/build" ]; then \
-	cmake $(MLXDIR) -B $(MLXDIR)/build > /dev/null 2>&1 && \
+	@if [ ! -d $(MLX_\DIR)/build ]; then \
+	cmake $(MLXDIR) -B $(MLXDIR)/build > /dev/null 2>&1&& \
 	make -C $(MLXDIR)/build -j4 > /dev/null 2>&1; \
 	fi
+
+$(MLX): $(BUILD)
+	@$(MAKE) -C $(BUILD)
 
 clean:
 	@echo "$(RED_BRIGHT)\nThrowing object files of Fdf to 🗑️$(RESET)"
 	rm -f $(OBJ)
 	@echo "$(RED_BRIGHT)\nThrowing object files of Printf to 🗑️$(RESET)"
-	rm -f $(PRINTFDIR)/*.o
-	rm -f $(BUILD)
+	@$(MAKE) -C $(PRINTFDIR) clean --silent
+	rm -rf $(BUILD)
 
 fclean: clean
 	@echo "$(RED_BRIGHT)\nDestroying printf 💥$(RESET)"
-	rm -f $(PRINTF)
+	@$(MAKE) -C $(PRINTFDIR) fclean --silent
 	@echo "$(RED_BRIGHT)\nDestroying program 💥$(RESET)"
+	@$(MAKE) clean --silent
 	rm -f $(NAME)
 	@echo "\n$(BOLD_GREEN) Bye bye 👋 $(RESET)\n"
 
