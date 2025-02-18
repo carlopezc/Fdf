@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/17 12:00:41 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:50:47 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct	matrix_map
 char	*get_next_line(int fd);
 
 int	ft_strcmp(char *str, char *str2);
+void	bresenham_algorithm(matrix_map *map);
+void	init_algorithm(matrix_point *initial_point, matrix_point *final_point, matrix_map *map);
 int	ft_strlen_gnl(char *str);
 int	ft_check_ext(char *str);
 matrix_map	*ft_check_format(int fd);

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:06 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/17 17:28:27 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:19:05 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int	main(int argc, char **argv)
 		return (ft_error_message("Error while creating map\n"), -1);
 	map->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
+	bresenham_algorithm(map);
 	return (0);
 }

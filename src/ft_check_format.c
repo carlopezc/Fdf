@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/17 10:49:40 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:58:24 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,11 +186,11 @@ matrix_map	*ft_check_format(int fd)
 		return (free(initial_map), NULL);
 	int_map = ft_int_split(initial_map, '\n');
 	if (!int_map)
-		return (free(initial_map), ft_free_array((void **)int_map), NULL);
+		return (free(initial_map), NULL);
 	map = ft_build_map(int_map, initial_map);
 	if (!map)
-		return (ft_free_array((void **)int_map), free(map), free(initial_map), NULL);
-	return (free(initial_map), ft_free_array((void **)int_map), map);
+		return (NULL);
+	return (map);
 }
 
 int	ft_check_ext(char *str)

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:16:32 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/17 10:54:44 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:57:32 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ matrix_map	*ft_build_map(int **int_map, char *initial_map)
 	ft_printf("Rows son: %i\n", rows);
 	map = (matrix_point **)malloc((rows + 1) * sizeof(matrix_point *));
 	if (!map)
-		return (NULL);
+		return (ft_free_array((void **)int_map), free(initial_map), NULL);
 	map[rows] = NULL;
 	columns = ft_count_num(initial_map, '\n');
 	ft_printf("Columns es %i\n", columns);
 	ft_build_lines(int_map, map, columns);
 	p_map = (matrix_map *)malloc(sizeof(matrix_map));
 	if (!p_map)
-		return (NULL);
+		return (ft_free_array((void **)int_map), free(initial_map), NULL);
 	p_map->point = map;
 	print_map(map, columns);
-	return (ft_free_array((void **)int_map), p_map);
+	return (ft_free_array((void **)int_map), free(initial_map), p_map);
 }

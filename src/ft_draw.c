@@ -6,98 +6,106 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:59:02 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/17 18:35:45 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:32:44 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-int	abs(int 0_point, int 1_point)
+int	ft_abs(int value)
 {
-	int	abs_point;
-
-	abs_point = 1_point - 0_point;
-	if (abs_point < 0)
-		abs_point = abs_point * -1;
-	return (abs_point);
+	if (value < 0)
+		value = value * -1;
+	return (value);
 }
 
-int	get_s_value(matrix_point *0_point, matrix_point *1_point)
+int	*get_s_value(int initial_dx, int initial_dy, int final_dx, int final_dy)
 {
-	int	s;
-	//esta mal, y solo se calcula al principio, si x0 < x1 sx = 1
-	//si x0 > x1 sx = -1
-	//se calcula una soola vez al principio
+	int	*s;
 
-	if (0_point->x < 1_point->x)
-		s = 1;
+	s = (int *)malloc(2 * sizeof(int));
+	if (!s)
+		return (NULL);
+	if (initial_dx < final_dx)
+		s[0] = 1;
 	else
-		s = -1;
+		s[0] = -1;
+	if (initial_dy < final_dy)
+		s[1] = 1;
+	else
+		s[1] = -1;
 	return (s);
 }
 
-void	print_line(int 0_dx, int 0_dy, int 1_dx, int 1_dy)
+void	print_line(matrix_map *map, int initial_dx, int initial_dy, int final_dx, int final_dy)
 {
 	int	dx;
 	int	dy;
 	int	error;
 	int	dir;
+	int	*s;
 
-	dx = abs(1_dx - 0_dx);
-	dy = abs(1_dy - 0_dy);
+	dx = ft_abs(final_dx - initial_dx);
+	dy = ft_abs(final_dy - initial_dy);
 	error = dx - dy;
-	dir = 2 * error; //multiplicamos por dos para evitar fracciones
-	while ()
+	dir = 2 * error;
+	s = get_s_value(initial_dx, initial_dy, final_dx, final_dy); 
+	if (!s)
+		return ; //gestionar este fin de programa
+	while (1 == 1)
 	{
-		plot(0_dx, 0_dy); //dibuja el punto
-		if (0_dx == 1_dx && 0_dy == 1_dy)
+		mlx_put_pixel(map->img, initial_dx, initial_dy, 0x00000); //dibuja el punto
+		mlx_image_to_window(map->mlx, map->img, 0, 0);
+		if (initial_dx == final_dx && initial_dy == final_dy)
 			break ;
 		if (dir > -dy)
 		{
 			error = error - dy;
-			0_dx = 0_dx + get_s_value();
+			initial_dx = initial_dx + s[0];
 		}
 		if (dir < dx)
 		{
 			error = error + dx;
-			0_dy = 0_dy + get_s_value();
+			initial_dy = initial_dy + s[1];
 		}
-
-
 	}
+	ft_printf("ha recorrido toda la linea yuhu!\n");
+	return (free(s));
 }
 
-void	3D_to_2D(matriz_point *point, int *dx, int *dy)
+void	bresenham_algorithm(matrix_map *map)
 {
-	double angle = 30 * (M_PI / 180);
+	matrix_point	**point;
 
-	*dx = (point->x - point->y) * cos(angle);
-	*dy = (point->x - point->y) * sin(angle) - point->z;
+	point = map->point;
+	init_algorithm(point[1], point[1] + 1, map);
+	init_algorithm(point[1] + 2, point[1] + 3, map);
+	//mlx_key_hook(map->mlx, , map);
+	mlx_loop(map->mlx);
+	mlx_delete_image(map->mlx, map->img);
+	mlx_terminate(map->mlx);
 	return ;
 }
-/*
-void	bresenhams_algortihm()
+
+void	to_twod(matrix_point *point, int *dx, int *dy)
 {
-
-
+	double angle;
+       
+	angle = 30 * (M_PI / 180);
+	*dx = (point->x - point->y) * cos(angle);
+	*dy = (point->x - point->y) * sin(angle) - point->h;
+	return ;
 }
-*/
-void	init_algorithm(matrix_point*	0_point, matrix_point *1_point)
+
+void	init_algorithm(matrix_point *initial_point, matrix_point *final_point, matrix_map *map)
 {
-	int	0_dx;
-	int	0_dy;
-	int	1_dx;
-	int	1_dy;
-	int	error;
-/*
-	dx = abs(0_point->x, 1_point->x);
-	dy = abs(0_point->y, 1_point->y);
-	*/
-	3D_to_2D(0_point, &0_dx, &0_dy);
-	3D_to_2D(1_point, &1_dx, &1_dy);
-	print_line(0_dx, 0_dy, 1_dx, 1_dy);
+	int	initial_dx;
+	int	initial_dy;
+	int	final_dx;
+	int	final_dy;
 
-	error = dx - dy;
-	bresenhams_algorithm(dx, dy, error);
-
+	to_twod(initial_point, &initial_dx, &initial_dy);
+	to_twod(final_point, &final_dx, &final_dy);
+	print_line(map, initial_dx, initial_dy, final_dx, final_dy);
+	return ;
 }
