@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:31:17 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/13 16:26:32 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:34:12 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,17 @@ int	*make_line(char *s, char c, int *i)
 	return (row);
 }
 
-static int	**ft_fill_array(int **arr, char *s, char c)
+int	**ft_fill_array(int **arr, char *s, char c, int len)
 {
-	size_t			j;
+	int			j;
 	int	i;
 
 	j = 0;
 	i = 0;
-	while (arr[j])
+	ft_printf("Entra a rellenar el array \n");
+	while (j < len)
 	{
+		ft_printf("Entra a rellenar el array \n");
 		arr[j] = make_line(s, c, &i);
 		if (!arr[j])
 			return (ft_free_array((void **)arr), NULL);
@@ -132,16 +134,18 @@ void	print_int_map(int **arr, int len)
 	if (!arr)
 		return ;
 	i = 0;
+	j = 0;
+	ft_printf("va a imprimir se supone\n");
 	while (arr[i])
 	{
-		j = 0;
 		while (j < len)
 		{
-			ft_printf("%i ", arr[i][j]);
+			ft_printf("%i", arr[i][j]);
 			j++;
 		}
-		i++;
+		j = 0;
 		ft_printf("\n");
+		i++;
 	}
 	return ;
 }
@@ -149,16 +153,18 @@ void	print_int_map(int **arr, int len)
 int	**ft_int_split(char *s, char c)
 {
 	int	**arr;
-	size_t	len;
+	int	len;
 
 	if (!s)
 		return (NULL);
+	ft_printf("s esta bien creada en int split\n");
 	len = ft_count_lines(s, c);
+	ft_printf("len de int split es: %i\n", len);
 	arr = (int **)malloc((len + 1) * sizeof(int *));
 	if (!arr)
 		return (NULL);
 	arr[len] = NULL;
-	arr = ft_fill_array(arr, s, c);
+	ft_fill_array(arr, s, c, len);
 	print_int_map(arr, len);
 	return (arr);
 }

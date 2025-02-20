@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:59:02 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/19 15:51:52 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:59:08 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ int	ft_abs(int value)
 	return (value);
 }
 
-int	*get_s_value(int initial_dx, int initial_dy, int final_dx, int final_dy)
+int	*get_s_value(matrix_point initial, matrix_point final)
 {
 	int	*s;
 
 	s = (int *)malloc(2 * sizeof(int));
 	if (!s)
 		return (NULL);
-	if (initial_dx < final_dx)
+	if (initial.x < final.x)
 		s[0] = 1;
 	else
 		s[0] = -1;
-	if (initial_dy < final_dy)
+	if (initial.y < final.y)
 		s[1] = 1;
 	else
 		s[1] = -1;
 	return (s);
 }
-
+/*
 void	draw_1(mlx_image_t *img, t_point initial, t_point final)
 {
 	int	dx;
@@ -50,15 +50,72 @@ void	draw_1(mlx_image_t *img, t_point initial, t_point final)
 	s = get_s_value(initial_dx, initial_dy, final_dx, final_dy);
 	error = (2 * dy) - dx;
 }
-
-void	print_line(matrix_map *map, int initial_dx, int initial_dy, int final_dx, int final_dy)
+*/
+void	draw_horizontal(mlx_image_t *img, matrix_point initial, matrix_point final)
 {
+	int	*s;
+	int	error;
+	int	dx;
+	int	dy;
+	int	i;
+
+	dx = ft_abs(final.x - initial.x);
+	dy = ft_abs(final.y - initial.y);
+	s = get_s_value(initial, final);
+	error = (2 * dy) - dx;
+	i = 0;
+	while (i <= dx)
+	{
+		mlx_put_pixel(img, initial.x, initial.y, 0xff0000);
+		if (error > 0)
+		{
+			initial.y += s[1];
+			error -= (2 * dx);
+		}
+		error += (2 * dy);
+		initial.x += s[0];
+		i++;
+	}
+	return (free(s));
+}
+
+void	draw_vertical(mlx_image_t *img, matrix_point initial, matrix_point final)
+{
+	int	*s;
+	int	error;
+	int	dx;
+	int	dy;
+	int	i;
+
+	dx = ft_abs(final.x - initial.x);
+	dy = ft_abs(final.y - initial.y);
+	s = get_s_value(initial, final);
+	error = (2 * dx) - dy;
+	i = 0;
+	while (i <= dy)
+	{
+		mlx_put_pixel(img, initial.x, initial.y, 0xff0000);
+		if (error > 0)
+		{
+			initial.x += s[0];
+			error -= (2 * dy);
+		}
+		error += (2 * dx);
+		initial.y += s[1];
+		i++;
+	}
+	return (free(s));
+}
+
+void	print_line(matrix_map *map, matrix_point initial, matrix_point final)
+{
+	/*
 	int	dx;
 	int	dy;
 	int	error;
 	int	dir;
 	int	*s;
-
+*/
 	/*
 	dx = ft_abs(final_dx - initial_dx);
 	dy = ft_abs(final_dy - initial_dy);
@@ -68,22 +125,23 @@ void	print_line(matrix_map *map, int initial_dx, int initial_dy, int final_dx, i
 	if (!s)
 		return ; //gestionar este fin de programa
 	*/
-	mlx_put_pixel(map->img, initial_dx, initial_dy, 0x00000); //dibuja el punto
-	if (ft_abs(initial_dy - final_dy) < ft_abs(initial_dx - final_dx))
+	//mlx_put_pixel(map->img, initial_dx, initial_dy, 0x00000); //dibuja el punto
+	ft_printf("ha entrado en print line \n");
+	if (ft_abs(final.y - initial.y) < ft_abs(final.x - initial.x))
 	{
 		//si es mas ancho que alto el recorrido
-		if (initial_dx > final_dx)
-			draw_1();
+		if (initial.x > final.x)
+			draw_horizontal(map->img, final, initial);
 		else
-			draw_1();
+			draw_horizontal(map->img, initial, final);
 	}
 	else
 	{
 		//si es mas alto que ancho el recorrido
-		if ()
-			draw_2();
+		if (initial.y > final.y)
+			draw_vertical(map->img, final, initial);
 		else
-			draw_2();
+			draw_vertical(map->img, initial, final);
 	}
 	/*
 	if (dir > -dy)
@@ -99,24 +157,28 @@ void	print_line(matrix_map *map, int initial_dx, int initial_dy, int final_dx, i
 	}
 	*/
 	ft_printf("ha recorrido toda la linea yuhu!\n");
-	return (free(s));
+	return ;
 }
 
 void	bresenham_algorithm(matrix_map *map)
 {
-	matrix_point	**point;
+	int	x;
+	int	y;
 
 	y = 0;
 	x = 0;
-	point = map->point;
-	while (point[y][x])
+	ft_printf("entra en bresenham algorithm \n");
+	ft_printf("map width es : %i\n", map->width);
+	ft_printf("map height es : %i\n", map->height);
+	while (x < map->width)
 	{
-		while (point[y])
+		while (y < map->height)
 		{
-			if (point[y][x] && point[y][x + 1])
-				init_algorithm(point[y][x], point[y][x + 1], map); //ft_print_line();
-			if (point[y][x] && point[y + 1][x])
-				init_algorithm(point[y][x], point[y + 1][x], map); //ft_print_line();
+			ft_printf("entra en bresenham antes de los ifs\n");
+			if (x + 1 < map->width)
+				print_line(map, map->point[y][x], map->point[y][x + 1]); //ft_print_line();
+			if (y + 1 < map->height)
+				print_line(map, map->point[y][x], map->point[y + 1][x]); //ft_print_line();
 			y++;
 		}
 		ft_printf("primera linea i=0 recorrida\n");
@@ -136,6 +198,7 @@ void	bresenham_algorithm(matrix_map *map)
 	return ;
 }
 
+/*
 void	to_perspective(matrix_point *point, int *dx, int *dy)
 {
 	double angle;
@@ -146,16 +209,12 @@ void	to_perspective(matrix_point *point, int *dx, int *dy)
 	return ;
 }
 
-void	init_algorithm(matrix_point *initial_point, matrix_point *final_point, matrix_map *map)
+void	init_algorithm(matrix_point initial_point, matrix_point final_point, matrix_map *map)
 {
-	int	initial_dx;
-	int	initial_dy;
-	int	final_dx;
-	int	final_dy;
-
 	//podria meter los puntos en array 
-	to_perspective(initial_point, &initial_dx, &initial_dy);
-	to_perspective(final_point, &final_dx, &final_dy);
+	//to_perspective(initial_point, &initial_dx, &initial_dy);
+	//to_perspective(final_point, &final_dx, &final_dy);
 	print_line(map, initial_dx, initial_dy, final_dx, final_dy);
 	return ;
 }
+*/

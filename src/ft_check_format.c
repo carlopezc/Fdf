@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/18 12:58:24 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:18:26 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*get_map(int fd, char **final_map)
 			line = get_next_line(fd);
 		}
 	}
+	ft_printf("Mapa guardado en el array: \n%s\n", *final_map);
 	return (*final_map);
 }
 

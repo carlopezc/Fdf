@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/18 12:50:47 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:17:52 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct	matrix_map
 	matrix_point	**point;
 	mlx_t	*mlx;
 	mlx_image_t	*img;
+	int	width;
+	int	height;
 }	matrix_map;
 
 char	*get_next_line(int fd);
