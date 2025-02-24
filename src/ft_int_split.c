@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:31:17 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/20 18:34:12 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:17:44 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_atoi(int *i, char *s)
 	int	sign;
 	int	num;
 
-	ft_printf("i vale: %i\n", *i);
+	//ft_printf("i vale: %i\n", *i);
 	while (s && (s[*i] == ' ' || s[*i] == '\n'))
 		(*i)++;
 	sign = 1;
@@ -95,7 +95,7 @@ int	*make_line(char *s, char c, int *i)
 	int	j;
 
 	nums = ft_count_num(s, c);
-	ft_printf("nums son %i\n", nums);
+	//ft_printf("nums son %i\n", nums);
 	if (nums == 0)
 		return (NULL);
 	row = (int *)malloc(nums * sizeof(int));
@@ -114,10 +114,10 @@ int	**ft_fill_array(int **arr, char *s, char c, int len)
 
 	j = 0;
 	i = 0;
-	ft_printf("Entra a rellenar el array \n");
+	//ft_printf("Entra a rellenar el array \n");
 	while (j < len)
 	{
-		ft_printf("Entra a rellenar el array \n");
+		//ft_printf("Entra a rellenar el array \n");
 		arr[j] = make_line(s, c, &i);
 		if (!arr[j])
 			return (ft_free_array((void **)arr), NULL);
@@ -135,7 +135,7 @@ void	print_int_map(int **arr, int len)
 		return ;
 	i = 0;
 	j = 0;
-	ft_printf("va a imprimir se supone\n");
+	//ft_printf("va a imprimir se supone\n");
 	while (arr[i])
 	{
 		while (j < len)
@@ -157,14 +157,14 @@ int	**ft_int_split(char *s, char c)
 
 	if (!s)
 		return (NULL);
-	ft_printf("s esta bien creada en int split\n");
+	//ft_printf("s esta bien creada en int split\n");
 	len = ft_count_lines(s, c);
-	ft_printf("len de int split es: %i\n", len);
+	//ft_printf("len de int split es: %i\n", len);
 	arr = (int **)malloc((len + 1) * sizeof(int *));
 	if (!arr)
 		return (NULL);
 	arr[len] = NULL;
 	ft_fill_array(arr, s, c, len);
-	print_int_map(arr, len);
+	//print_int_map(arr, len);
 	return (arr);
 }

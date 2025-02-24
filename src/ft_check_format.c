@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 13:07:33 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:31:36 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_map(int fd, char **final_map)
 			line = get_next_line(fd);
 		}
 	}
-	ft_printf("Mapa guardado en el array: \n%s\n", *final_map);
+	//ft_printf("Mapa guardado en el array: \n%s\n", *final_map);
 	return (*final_map);
 }
 
@@ -85,6 +85,8 @@ int	count_size(char *initial_map, int *i)
 			(*i)++;
 			while (initial_map[*i] && (initial_map[*i] <= '9' && initial_map[*i] >= '0'))
 				(*i)++;
+			if (initial_map[*i] && (initial_map[*i] == ','))
+
 		}
 		else
 			(*i)++;
@@ -145,6 +147,12 @@ int	check_digits(char *initial_map)
 			return (0);
 		while (initial_map[i] && (initial_map[i] <= '9' && initial_map[i] >= '0'))
 			i++;
+		if (initial_map[i] && initial_map[i] == ',')
+		{
+			i++
+			while ((initial[i] <= '9' && initial[i] >= '0') || (initial_map[i] >= 'A' && initial_map[i] <= 'Z'))
+				i++;
+		}
 	}
 	return (1);
 }
@@ -158,9 +166,6 @@ void	print_map(matrix_map *map, int size)
 		return ;
 	i = 0;
 	j = 0;
-	ft_printf("size es %i\n", size);
-	if (!map->point[i])
-		ft_printf("cagadon\n");
 	while (map->point[i])
 	{
 		j = 0;
@@ -183,6 +188,8 @@ matrix_map	*ft_check_format(int fd, matrix_map *map)
 	char	*initial_map;
 	int	**int_map;
 	
+	initial_map = NULL;
+	int_map = NULL;
 	get_map(fd, &initial_map);
 	if (!check_digits(initial_map) || !check_size(initial_map))
 		return (free(initial_map), NULL);

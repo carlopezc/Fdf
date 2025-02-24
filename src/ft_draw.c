@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:59:02 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 13:35:32 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:39:48 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,7 @@ int	*get_s_value(matrix_point initial, matrix_point final)
 		s[1] = -1;
 	return (s);
 }
-/*
-void	draw_1(mlx_image_t *img, t_point initial, t_point final)
-{
-	int	dx;
-	int	dy;
-	int	error;
-	int	sx;
-	int	sy;
 
-	dx = ft_abs(final_dx - initial_dx);
-	dy = ft_abs(final_dy - initial_dy);
-	s = get_s_value(initial_dx, initial_dy, final_dx, final_dy);
-	error = (2 * dy) - dx;
-}
-*/
 void	draw_horizontal(mlx_image_t *img, matrix_point initial, matrix_point final)
 {
 	int	*s;
@@ -66,8 +52,7 @@ void	draw_horizontal(mlx_image_t *img, matrix_point initial, matrix_point final)
 	i = 0;
 	while (i <= dx)
 	{
-		ft_printf("Draw horizontal\n");
-		mlx_put_pixel(img, initial.x, initial.y, 0xffffff);
+		mlx_put_pixel(img, initial.x, initial.y, 0xFFFFFFFF);
 		if (error > 0)
 		{
 			initial.y += s[1];
@@ -95,8 +80,7 @@ void	draw_vertical(mlx_image_t *img, matrix_point initial, matrix_point final)
 	i = 0;
 	while (i <= dy)
 	{
-		ft_printf("Draw vertical\n");
-		mlx_put_pixel(img, initial.x, initial.y, 0xffffff);
+		mlx_put_pixel(img, initial.x, initial.y, 0xFFFFFFFF);
 		if (error > 0)
 		{
 			initial.x += s[0];
@@ -125,32 +109,12 @@ void	ft_isometric(matrix_point *final)
 	final->y = (prev_x + final->y) * sin(angle) - final->h + 450;
 }
 
-void	print_line(matrix_map *map, matrix_point initial, matrix_point final)
+void	ft_print_line(matrix_map *map, matrix_point initial, matrix_point final)
 {
-	/*
-	int	dx;
-	int	dy;
-	int	error;
-	int	dir;
-	int	*s;
-*/
-	/*
-	dx = ft_abs(final_dx - initial_dx);
-	dy = ft_abs(final_dy - initial_dy);
-	error = dx - dy;
-	dir = 2 * error;
-	s = get_s_value(initial_dx, initial_dy, final_dx, final_dy); 
-	if (!s)
-		return ; //gestionar este fin de programa
-	*/
-	//mlx_put_pixel(map->img, initial_dx, initial_dy, 0x00000); //dibuja el punto
-	ft_printf("ha entrado en print line \n");
 	ft_zoom(&final, map);
 	ft_zoom(&initial, map);
 	ft_isometric(&final);
 	ft_isometric(&initial);
-
-	print_map(map, map->height);
 	if (ft_abs(final.y - initial.y) < ft_abs(final.x - initial.x))
 	{
 		//si es mas ancho que alto el recorrido
@@ -167,20 +131,7 @@ void	print_line(matrix_map *map, matrix_point initial, matrix_point final)
 		else
 			draw_vertical(map->img, initial, final);
 	}
-	/*
-	if (dir > -dy)
-		{
-			error = error - dy;
-			initial_dx = initial_dx + s[0];
-		}
-		if (dir < dx)
-		{
-			error = error + dx;
-			initial_dy = initial_dy + s[1];
-		}
-	}
-	*/
-	ft_printf("ha recorrido toda la linea yuhu!\n");
+	//ft_printf("ha recorrido toda la linea yuhu!\n");
 	return ;
 }
 
@@ -193,31 +144,19 @@ void	bresenham_algorithm(matrix_map *map)
 	y = 0;
 	x = 0;
 	point = map->point;
-	ft_printf("entra en bresenham algorithm \n");
-	ft_printf("map width es : %i\n", map->width);
-	ft_printf("map height es : %i\n", map->height);
 	while (x < map->width)
 	{
 		while (y < map->height)
 		{
-			ft_printf("entra en bresenham antes de los ifs\n");
-			ft_printf("punto %i\n", point[0][0].x);
 			if (x + 1 < map->width)
-				print_line(map, point[y][x], point[y][x + 1]);
+				ft_print_line(map, point[y][x], point[y][x + 1]);
 			if (y + 1 < map->height)
-				print_line(map, point[y][x], point[y + 1][x]);
+				ft_print_line(map, point[y][x], point[y + 1][x]);
 			y++;
 		}
-		ft_printf("primera linea i=0 recorrida\n");
 		y = 0;
 		x = x + 1;
 	}
-	ft_printf("ya ha recorrido todo \n");
-	/*
-	init_algorithm(point[1], point[1] + 1, map);
-	init_algorithm(point[1] + 2, point[1] + 3, map);
-	//mlx_key_hook(map->mlx, , map);
-	*/
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
 	mlx_loop(map->mlx);
 	mlx_delete_image(map->mlx, map->img);

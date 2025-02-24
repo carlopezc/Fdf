@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:06 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 13:03:49 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:42:07 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@ void	ft_error_message(char *str)
 	return ;
 }
 
+void	ft_free_matrix(matrix_map *map)
+{
+	matrix_point	**point;
+	int	i;
+
+	if (!map)
+		return ;
+	point = map->point;
+	i = 0;
+	while (i < map->height)
+	{
+		free(point[i]);
+		i++;
+	}
+	free(point);
+	free(map);
+	return ;
+}
+
 int	main(int argc, char **argv)
 {
 	int	fd;
@@ -48,15 +67,8 @@ int	main(int argc, char **argv)
 	map = ft_check_format(fd, map);
 	if (!map)
 		return (ft_error_message("Error while creating map\n"), -1);
-	if (map->point)
-		ft_printf("lo que apunta a map existe\n");
 	map->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-	/*
-	if ((map->point)[0][0].x == 0)
-		ft_printf("Map point existe\n");
-		*/
-	print_map(map, map->width);
 	bresenham_algorithm(map);
-	return (0);
+	return (ft_free_matrix(map), 0);
 }
