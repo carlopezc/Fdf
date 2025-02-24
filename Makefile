@@ -6,7 +6,7 @@
 #    By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 15:49:58 by carlopez          #+#    #+#              #
-#    Updated: 2025/02/20 15:36:59 by carlopez         ###   ########.fr        #
+#    Updated: 2025/02/24 10:25:40 by carlopez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ all:
 
 $(NAME): $(MAIN) $(OBJ) $(PRINTF) $(MLX)
 	@echo "$(BOLD_CYAN)\nCompiling program...$(RESET)"
-	$(CC) $(CFLAGS) $(MLXFLAGS) $(MLX) $(MAIN) $(OBJ) $(PRINTF) $(MLX) -o $(NAME)
+	$(CC) $(CFLAGS) $(MAIN) $(OBJ) $(PRINTF) $(MLX) $(MLXFLAGS) -o $(NAME)
 	@echo "$(BOLD_CYAN)\n!Compilation completed, $(LIGHT_YELLOW)fdf🚀$(BOLD_CYAN) ready to be used!\n$(RESET)"
 
 %.o: %.c $(LIB) Makefile

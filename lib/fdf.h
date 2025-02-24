@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/20 15:17:52 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:04:38 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ void	bresenham_algorithm(matrix_map *map);
 void	init_algorithm(matrix_point *initial_point, matrix_point *final_point, matrix_map *map);
 int	ft_strlen_gnl(char *str);
 int	ft_check_ext(char *str);
-matrix_map	*ft_check_format(int fd);
+matrix_map	*ft_check_format(int fd, matrix_map *map);
 int	ft_check_parameters(int argc, char **argv);
 char	*ft_strjoin(char *s1, char const *s2);
 char	*ft_strjoin_gnl(char *str, char *str2);
 int	**ft_int_split(char *s, char c);
 char	*ft_substr(char *s, int start, int len);
 char	*ft_strdup(char *s);
-void	print_map(matrix_point **map, int size);
+void	print_map(matrix_map *map, int size);
 void	ft_error_message(char *str);
 
 void	ft_free_array(void **arr);
-matrix_map	*ft_build_map(int **map, char *initial_map);
+matrix_map	*ft_build_map(int **int_map, char *initial_map, matrix_map *p_map);
 int	ft_count_num(char *s, char c);
 
 #endif

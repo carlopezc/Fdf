@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/20 18:18:26 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:07:33 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,25 +149,27 @@ int	check_digits(char *initial_map)
 	return (1);
 }
 
-void	print_map(matrix_point **map, int size)
+void	print_map(matrix_map *map, int size)
 {
 	int	i;
 	int	j;
 
-	if (!map || !*map)
+	if (!map)
 		return ;
 	i = 0;
 	j = 0;
 	ft_printf("size es %i\n", size);
-	while (map[i])
+	if (!map->point[i])
+		ft_printf("cagadon\n");
+	while (map->point[i])
 	{
 		j = 0;
 		while (j < size)
 		{
-			ft_printf("x: %i\n", (map[i][j].x));
-			ft_printf("y: %i\n", (map[i][j].y));
-			ft_printf("h: %i\n", (map[i][j].h));
-			ft_printf("colour: %i\n", (map[i][j].colour));
+			ft_printf("x: %i\n", ((map->point)[i][j].x));
+			ft_printf("y: %i\n", ((map->point)[i][j].y));
+			ft_printf("h: %i\n", ((map->point)[i][j].h));
+			ft_printf("colour: %i\n", ((map->point)[i][j].colour));
 			ft_printf("\n\n");
 			j++;
 		}
@@ -176,11 +178,10 @@ void	print_map(matrix_point **map, int size)
 	return ;
 }
 
-matrix_map	*ft_check_format(int fd)
+matrix_map	*ft_check_format(int fd, matrix_map *map)
 {
 	char	*initial_map;
 	int	**int_map;
-	matrix_map	*map;
 	
 	get_map(fd, &initial_map);
 	if (!check_digits(initial_map) || !check_size(initial_map))
@@ -188,9 +189,7 @@ matrix_map	*ft_check_format(int fd)
 	int_map = ft_int_split(initial_map, '\n');
 	if (!int_map)
 		return (free(initial_map), NULL);
-	map = ft_build_map(int_map, initial_map);
-	if (!map)
-		return (NULL);
+	map = ft_build_map(int_map, initial_map, map);
 	return (map);
 }
 

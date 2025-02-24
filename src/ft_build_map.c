@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:16:32 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/20 18:39:42 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:10:30 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	fill_line(int **int_map, matrix_point *map, int i, int p_size)
 	return ;
 }
 
-void	ft_build_lines(int **int_map, matrix_point **map, int columns)
+void	ft_build_lines(int **int_map, matrix_point **map, int columns, int rows)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ void	ft_build_lines(int **int_map, matrix_point **map, int columns)
 		return ;
 	i = 0;
 	ft_printf("Entra en build_lines\n");
-	while (map[i])
+	while (i < rows)
 	{
 		map[i] = (matrix_point *)malloc(columns * sizeof(matrix_point));
 		if (!map[i])
@@ -66,10 +66,9 @@ void	ft_build_lines(int **int_map, matrix_point **map, int columns)
 	return ;
 }
 
-matrix_map	*ft_build_map(int **int_map, char *initial_map)
+matrix_map	*ft_build_map(int **int_map, char *initial_map, matrix_map *p_map)
 {
 	matrix_point	**map;
-	matrix_map	*p_map;
 	int	rows;
 	int	columns;
 
@@ -83,13 +82,10 @@ matrix_map	*ft_build_map(int **int_map, char *initial_map)
 	map[rows] = NULL;
 	columns = ft_count_num(initial_map, '\n');
 	ft_printf("Columns es %i\n", columns);
-	ft_build_lines(int_map, map, columns);
-	p_map = (matrix_map *)malloc(sizeof(matrix_map));
-	if (!p_map)
-		return (ft_free_array((void **)int_map), free(initial_map), NULL);
+	ft_build_lines(int_map, map, columns, rows);
 	p_map->point = map;
 	p_map->height = rows;
 	p_map->width = columns;
-	print_map(map, columns);
+	print_map(p_map, columns);
 	return (ft_free_array((void **)int_map), free(initial_map), p_map);
 }

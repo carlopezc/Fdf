@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:59:02 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/20 18:59:08 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:35:32 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	draw_horizontal(mlx_image_t *img, matrix_point initial, matrix_point final)
 	i = 0;
 	while (i <= dx)
 	{
-		mlx_put_pixel(img, initial.x, initial.y, 0xff0000);
+		ft_printf("Draw horizontal\n");
+		mlx_put_pixel(img, initial.x, initial.y, 0xffffff);
 		if (error > 0)
 		{
 			initial.y += s[1];
@@ -94,7 +95,8 @@ void	draw_vertical(mlx_image_t *img, matrix_point initial, matrix_point final)
 	i = 0;
 	while (i <= dy)
 	{
-		mlx_put_pixel(img, initial.x, initial.y, 0xff0000);
+		ft_printf("Draw vertical\n");
+		mlx_put_pixel(img, initial.x, initial.y, 0xffffff);
 		if (error > 0)
 		{
 			initial.x += s[0];
@@ -105,6 +107,22 @@ void	draw_vertical(mlx_image_t *img, matrix_point initial, matrix_point final)
 		i++;
 	}
 	return (free(s));
+}
+
+void	ft_zoom(matrix_point *final, matrix_map *map)
+{
+	final->x = (((WIDTH - 100)/map->width) * final->x/2.5);
+	final->h *= 10;
+	final->y = (((HEIGHT - 100)/map->height) * final->y/2.5);
+}
+
+void	ft_isometric(matrix_point *final)
+{
+	double	angle = 0.523599; // 30° en radianes
+	double	prev_x = final->x;
+
+	final->x = (prev_x - final->y) * cos(angle) + 1000;
+	final->y = (prev_x + final->y) * sin(angle) - final->h + 450;
 }
 
 void	print_line(matrix_map *map, matrix_point initial, matrix_point final)
@@ -127,6 +145,12 @@ void	print_line(matrix_map *map, matrix_point initial, matrix_point final)
 	*/
 	//mlx_put_pixel(map->img, initial_dx, initial_dy, 0x00000); //dibuja el punto
 	ft_printf("ha entrado en print line \n");
+	ft_zoom(&final, map);
+	ft_zoom(&initial, map);
+	ft_isometric(&final);
+	ft_isometric(&initial);
+
+	print_map(map, map->height);
 	if (ft_abs(final.y - initial.y) < ft_abs(final.x - initial.x))
 	{
 		//si es mas ancho que alto el recorrido
@@ -164,9 +188,11 @@ void	bresenham_algorithm(matrix_map *map)
 {
 	int	x;
 	int	y;
+	matrix_point	**point;
 
 	y = 0;
 	x = 0;
+	point = map->point;
 	ft_printf("entra en bresenham algorithm \n");
 	ft_printf("map width es : %i\n", map->width);
 	ft_printf("map height es : %i\n", map->height);
@@ -175,10 +201,11 @@ void	bresenham_algorithm(matrix_map *map)
 		while (y < map->height)
 		{
 			ft_printf("entra en bresenham antes de los ifs\n");
+			ft_printf("punto %i\n", point[0][0].x);
 			if (x + 1 < map->width)
-				print_line(map, map->point[y][x], map->point[y][x + 1]); //ft_print_line();
+				print_line(map, point[y][x], point[y][x + 1]);
 			if (y + 1 < map->height)
-				print_line(map, map->point[y][x], map->point[y + 1][x]); //ft_print_line();
+				print_line(map, point[y][x], point[y + 1][x]);
 			y++;
 		}
 		ft_printf("primera linea i=0 recorrida\n");
