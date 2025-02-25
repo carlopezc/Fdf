@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:31:17 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 15:17:44 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:06:40 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static size_t	ft_count_lines(char const *s, char c)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] == c && s[i])
+		while (s[i] && s[i] == c)
 			i++;
 		if (s[i])
 		{
@@ -77,12 +77,14 @@ int	ft_count_num(char *s, char c)
 	{
 		while (s[i] && s[i] != c && (s[i] == ' ' || s[i] == '-' || s[i] == '+'))
 			i++;
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[i] && (s[i] >= '0' && s[i] <= '9'))
 		{
 			count++;
 			i++;
 		}
-		while (s[i] && s[i] >= '0' && s[i] <= '9')
+		if (s[i] && (s[i] == ','))
+			i++;
+		while (s[i] && ((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')))
 			i++;
 	}
 	return (count);
@@ -95,7 +97,7 @@ int	*make_line(char *s, char c, int *i)
 	int	j;
 
 	nums = ft_count_num(s, c);
-	//ft_printf("nums son %i\n", nums);
+	ft_printf("nums son %i\n", nums);
 	if (nums == 0)
 		return (NULL);
 	row = (int *)malloc(nums * sizeof(int));
@@ -114,10 +116,9 @@ int	**ft_fill_array(int **arr, char *s, char c, int len)
 
 	j = 0;
 	i = 0;
-	//ft_printf("Entra a rellenar el array \n");
 	while (j < len)
 	{
-		//ft_printf("Entra a rellenar el array \n");
+		ft_printf("Entra a rellenar el array \n");
 		arr[j] = make_line(s, c, &i);
 		if (!arr[j])
 			return (ft_free_array((void **)arr), NULL);
@@ -159,6 +160,7 @@ int	**ft_int_split(char *s, char c)
 		return (NULL);
 	//ft_printf("s esta bien creada en int split\n");
 	len = ft_count_lines(s, c);
+	ft_printf("ha contado lineas\n");
 	//ft_printf("len de int split es: %i\n", len);
 	arr = (int **)malloc((len + 1) * sizeof(int *));
 	if (!arr)

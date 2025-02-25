@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 17:31:36 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:52:14 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*get_map(int fd, char **final_map)
 			line = get_next_line(fd);
 		}
 	}
-	//ft_printf("Mapa guardado en el array: \n%s\n", *final_map);
 	return (*final_map);
 }
 
@@ -86,7 +85,11 @@ int	count_size(char *initial_map, int *i)
 			while (initial_map[*i] && (initial_map[*i] <= '9' && initial_map[*i] >= '0'))
 				(*i)++;
 			if (initial_map[*i] && (initial_map[*i] == ','))
-
+			{
+				(*i)++;
+				while (initial_map[*i] && ((initial_map[*i] <= '9' && initial_map[*i] >= '0') || (initial_map[*i] >= 'A' && initial_map[*i] <= 'Z') || (initial_map[*i] >= 'a' && initial_map[*i] <= 'z')))
+					(*i)++;
+			}
 		}
 		else
 			(*i)++;
@@ -117,7 +120,7 @@ int	check_size(char *initial_map)
 		}
 		else
 			num = count_size(initial_map, &i);
-		if (initial_map[i] == '\n')
+		while (initial_map[i] && (initial_map[i] == '\n' || initial_map[i] == ' '))
 			i++;
 		if (num != num_ref)
 			return (0);
@@ -129,29 +132,39 @@ int	check_size(char *initial_map)
 int	check_digits(char *initial_map)
 {
 	int	i;
+	int	j;
 
 	if (!initial_map)
 		return (0);
 	i = 0;
 	while (initial_map[i])
 	{
-		if (initial_map[i] && (initial_map[i] == ' ' || initial_map[i] == '\n'))
-		{
+		while (initial_map[i] && (initial_map[i] == ' ' || initial_map[i] == '\n'))
 			i++;
-			if (initial_map[i] && initial_map[i] == '\n')
-				i++;
-		}
 		if (initial_map[i] && (initial_map[i] == '-' || initial_map[i] == '+'))
 			i++;
 		if (initial_map[i] && (initial_map[i] > '9' || initial_map[i] < '0'))
-			return (0);
+			return (ft_printf("Error en los primeros numeros\n"), 0);
 		while (initial_map[i] && (initial_map[i] <= '9' && initial_map[i] >= '0'))
 			i++;
 		if (initial_map[i] && initial_map[i] == ',')
 		{
-			i++
-			while ((initial[i] <= '9' && initial[i] >= '0') || (initial_map[i] >= 'A' && initial_map[i] <= 'Z'))
+			i++;
+			if (initial_map[i] && initial_map[i + 1]
+					&& initial_map[i] == '0' && initial_map[i + 1] == 'x')
+				i = i + 2;
+			else
+				return (ft_error_message("Wrong colour format\n"), 0);
+			j = 0;
+			while ((initial_map[i] <= '9' && initial_map[i] >= '0')
+					|| (initial_map[i] >= 'A' && initial_map[i] <= 'Z')
+					|| (initial_map[i] >= 'a' && initial_map[i] <= 'z'))
+			{
 				i++;
+				j++;
+			}
+			if (j > 8)
+				return (ft_error_message("Wrong colour format\n"), 0);
 		}
 	}
 	return (1);
@@ -202,7 +215,6 @@ matrix_map	*ft_check_format(int fd, matrix_map *map)
 
 int	ft_check_ext(char *str)
 {
-
 	if (!str)
 		return (0);
 	while (str)
