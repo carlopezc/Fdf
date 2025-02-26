@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_format.c                                  :+:      :+:    :+:   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/25 16:52:14 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:14:15 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
-
-char	*get_map(int fd, char **final_map)
-{
-	char	*line;
-
-	*final_map = get_next_line(fd);
-	if (*final_map)
-	{
-		line = get_next_line(fd);
-		while (line)
-		{
-			*final_map = ft_strjoin_gnl(*final_map, line);
-			line = get_next_line(fd);
-		}
-	}
-	return (*final_map);
-}
 
 int	is_digit(char c)
 {
@@ -36,7 +19,7 @@ int	is_digit(char c)
 	return (0);
 }
 
-int	check_numbers(char **map)
+int	ft_check_numbers(char **map)
 {
 	int	i;
 
@@ -97,7 +80,7 @@ int	count_size(char *initial_map, int *i)
 	return (num);
 }
 
-int	check_size(char *initial_map)
+int	ft_check_size(char *initial_map)
 {
 	int	i;
 	int	num_ref;
@@ -129,7 +112,7 @@ int	check_size(char *initial_map)
 }
 
 
-int	check_digits(char *initial_map)
+int	ft_check_digits(char *initial_map)
 {
 	int	i;
 	int	j;
@@ -195,7 +178,7 @@ void	print_map(matrix_map *map, int size)
 	}
 	return ;
 }
-
+/*
 matrix_map	*ft_check_format(int fd, matrix_map *map)
 {
 	char	*initial_map;
@@ -211,6 +194,16 @@ matrix_map	*ft_check_format(int fd, matrix_map *map)
 		return (free(initial_map), NULL);
 	map = ft_build_map(int_map, initial_map, map);
 	return (map);
+}
+*/
+
+int	ft_check_format(char *char_map)
+{
+	if (!char_map)
+		return (0);
+	if (!ft_check_digits(char_map) || !ft_check_size(char_map))
+		return (free(char_map), 0);
+	return (1);
 }
 
 int	ft_check_ext(char *str)

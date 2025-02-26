@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:31:17 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/25 13:06:40 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:26:19 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,6 @@ int	ft_atoi(int *i, char *s)
 		num = num * 10 + (s[(*i)++] - '0');
 	return (sign * num);
 }
-
-int	ft_count_num(char *s, char c)
-{
-	int	count;
-	int	i;
-
-	if (!s)
-		return (-1);
-	count = 0;
-	i = 0;
-	while (s[i] && s[i] != c)
-	{
-		while (s[i] && s[i] != c && (s[i] == ' ' || s[i] == '-' || s[i] == '+'))
-			i++;
-		if (s[i] && (s[i] >= '0' && s[i] <= '9'))
-		{
-			count++;
-			i++;
-		}
-		if (s[i] && (s[i] == ','))
-			i++;
-		while (s[i] && ((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')))
-			i++;
-	}
-	return (count);
-}
-
 int	*make_line(char *s, char c, int *i)
 {
 	int	nums;

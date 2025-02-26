@@ -6,7 +6,7 @@
 #    By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 15:49:58 by carlopez          #+#    #+#              #
-#    Updated: 2025/02/24 15:41:13 by carlopez         ###   ########.fr        #
+#    Updated: 2025/02/26 14:35:35 by carlopez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ PINK_FUCHSIA    = \033[38;2;255;20;147m
 
 RESET  = \033[0m
 
-SRC = src/ft_build_map.c src/ft_check_format.c src/ft_int_split.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c src/utils_check_format.c src/ft_draw.c
+SRC = src/ft_count.c src/ft_build.c src/ft_check.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c src/ft_utils_check.c src/ft_draw.c src/ft_utils_build.c src/ft_get.c src/ft_fill.c
 OBJ = $(SRC:.c=.o)
 
 all:

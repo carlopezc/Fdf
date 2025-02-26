@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:06 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/25 16:43:52 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:14:09 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_error_message(char *str)
 void	ft_free_matrix(matrix_map *map)
 {
 	matrix_point	**point;
-	int	i;
+	int				i;
 
 	if (!map)
 		return ;
@@ -55,20 +55,23 @@ void	ft_free_matrix(matrix_map *map)
 
 int	main(int argc, char **argv)
 {
-	int	fd;
+	int			fd;
 	matrix_map	*map;
+	char		*char_map;
 
+	map = NULL;
 	fd = ft_check_parameters(argc, argv);
 	if (fd == -1)
 		return (-1);
-	map = (matrix_map *)malloc(sizeof(matrix_map));
-	if (!map)
-		return (ft_printf("Error while creating map\n"), -1);
-	map = ft_check_format(fd, map);
+	get_char_map(fd, &char_map);
+	if (!ft_check_format(char_map))
+		return (ft_error_message("Error in map format\n"), -1);
+	map = ft_build_map(char_map);
 	if (!map)
 		return (ft_error_message("Error while creating map\n"), -1);
 	map->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-	bresenham_algorithm(map);
+	if (map->mlx)
+		bresenham_algorithm(map);
 	return (ft_free_matrix(map), 0);
 }

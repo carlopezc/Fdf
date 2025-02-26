@@ -6,19 +6,19 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 13:04:38 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:09:31 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include "../printf/ft_printf.h"
-#include <unistd.h>
-#include "../MLX42/include/MLX42/MLX42.h"
-#include <math.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include "../printf/ft_printf.h"
+# include <unistd.h>
+# include "../MLX42/include/MLX42/MLX42.h"
+# include <math.h>
 # define WIDTH 4480
 # define HEIGHT 2520
 
@@ -27,7 +27,7 @@ typedef struct matrix_point
 	int	x;
 	int	y;
 	int	h;
-	int	colour;
+	uint32_t	colour;
 }	matrix_point;
 
 typedef struct	matrix_map 
@@ -46,7 +46,9 @@ void	bresenham_algorithm(matrix_map *map);
 void	init_algorithm(matrix_point *initial_point, matrix_point *final_point, matrix_map *map);
 int	ft_strlen_gnl(char *str);
 int	ft_check_ext(char *str);
-matrix_map	*ft_check_format(int fd, matrix_map *map);
+int	ft_check_format(char *char_map);
+matrix_map	*ft_build_map(char *char_map);
+void	ft_fill_line(char *char_map, matrix_map *map, int i, int *fix);
 int	ft_check_parameters(int argc, char **argv);
 char	*ft_strjoin(char *s1, char const *s2);
 char	*ft_strjoin_gnl(char *str, char *str2);
@@ -55,9 +57,12 @@ char	*ft_substr(char *s, int start, int len);
 char	*ft_strdup(char *s);
 void	print_map(matrix_map *map, int size);
 void	ft_error_message(char *str);
-
 void	ft_free_array(void **arr);
-matrix_map	*ft_build_map(int **int_map, char *initial_map, matrix_map *p_map);
-int	ft_count_num(char *s, char c);
+int	ft_count_rows(char *char_map);
+int	ft_count_columns(char *char_map);
+int	*ft_get_s(matrix_point initial, matrix_point final);
+long	ft_get_hexadecimal(char *char_map, int *i);
+void	ft_hex_mlx(uint32_t *colour);
+char	*get_char_map(int fd, char **final_map);
 
 #endif
