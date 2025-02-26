@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:59:02 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 15:39:48 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:45:36 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_horizontal(mlx_image_t *img, matrix_point initial, matrix_point final)
 	i = 0;
 	while (i <= dx)
 	{
-		mlx_put_pixel(img, initial.x, initial.y, 0xFFFFFFFF);
+		mlx_put_pixel(img, initial.x, initial.y, initial.colour);
 		if (error > 0)
 		{
 			initial.y += s[1];
@@ -80,7 +80,7 @@ void	draw_vertical(mlx_image_t *img, matrix_point initial, matrix_point final)
 	i = 0;
 	while (i <= dy)
 	{
-		mlx_put_pixel(img, initial.x, initial.y, 0xFFFFFFFF);
+		mlx_put_pixel(img, initial.x, initial.y, initial.colour);
 		if (error > 0)
 		{
 			initial.x += s[0];

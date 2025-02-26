@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:16:32 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/24 15:02:38 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:47:47 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_count_rows(int **int_map)
 	return (i);
 }
 
-void	fill_line(int **int_map, matrix_point *map, int i, int p_size)
+void	fill_line(int **int_map, matrix_point *map, int i, int columns)
 {
 	int	j;
 	int	x;
@@ -34,12 +34,12 @@ void	fill_line(int **int_map, matrix_point *map, int i, int p_size)
 	j = 0;
 	x = 0;
 	//ft_printf("Entra en fill_lines\n");
-	while (j < p_size)
+	while (j < columns)
 	{
 		map[j].x = x;
 		map[j].y = i;
 		map[j].h = int_map[i][x];
-		map[j].colour = 0; 
+		map[j].colour = 0xFFFFFFFF; 
 	//	ft_printf("rellena uno\n");
 		j++;
 		x++;
