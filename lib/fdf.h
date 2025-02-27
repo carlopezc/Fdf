@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/26 16:09:31 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:46:31 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_count_rows(char *char_map);
 int	ft_count_columns(char *char_map);
 int	*ft_get_s(matrix_point initial, matrix_point final);
 long	ft_get_hexadecimal(char *char_map, int *i);
-void	ft_hex_mlx(uint32_t *colour);
+void	ft_trgb_rgba(char *char_map, int *fix, matrix_point *point);
 char	*get_char_map(int fd, char **final_map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:22:35 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/26 14:34:44 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:25:16 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ long	ft_get_hexadecimal(char *char_map, int *i)
 			hex = hex * 16 + (char_map[*i] - 'a' + 10);
 		(*i)++;
 	}
+	ft_printf("El hexadecimal es %x\n", hex * sign);
 	return (hex * sign);
 }
