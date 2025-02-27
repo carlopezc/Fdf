@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:32:50 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 16:46:31 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:37:01 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ typedef struct	matrix_map
 char	*get_next_line(int fd);
 
 int	ft_strcmp(char *str, char *str2);
+int	ft_count_size(char *initial_map, int *i);
+void	ft_zoom(matrix_point *final, matrix_point *initial, matrix_map *map);
 void	bresenham_algorithm(matrix_map *map);
+void	ft_isometric(matrix_point *final, matrix_point *initial);
+void	ft_mlx(matrix_map *map);
 void	init_algorithm(matrix_point *initial_point, matrix_point *final_point, matrix_map *map);
 int	ft_strlen_gnl(char *str);
 int	ft_check_ext(char *str);
@@ -64,5 +68,14 @@ int	*ft_get_s(matrix_point initial, matrix_point final);
 long	ft_get_hexadecimal(char *char_map, int *i);
 void	ft_trgb_rgba(char *char_map, int *fix, matrix_point *point);
 char	*get_char_map(int fd, char **final_map);
+void	my_keyhook(mlx_key_data_t keydata, void *param);
+void	ft_free_matrix(matrix_map *map);
+void	ft_control_limit(matrix_point *point);
+int	is_digit(char c);
+int	ft_abs(int value);
+int	ft_check_digits(char *initial_map);
+int	ft_check_digits_ext(char *initial_map, int *i);
+int	ft_check_size(char *initial_map);
+
 
 #endif

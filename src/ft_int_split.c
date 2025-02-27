@@ -6,12 +6,12 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:31:17 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/26 11:26:19 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:43:58 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
-
+/*
 static size_t	ft_count_lines(char const *s, char c)
 {
 	size_t	i;
@@ -143,3 +143,4 @@ int	**ft_int_split(char *s, char c)
 	//print_int_map(arr, len);
 	return (arr);
 }
+*/

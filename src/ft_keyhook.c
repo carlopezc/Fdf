@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_window.c                                        :+:      :+:    :+:   */
+/*   ft_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 17:15:29 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:49:16 by carlopez         ###   ########.fr       */
+/*   Created: 2025/02/27 17:10:26 by carlopez          #+#    #+#             */
+/*   Updated: 2025/02/27 17:28:24 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-#include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+#include "../lib/fdf.h"
+
+void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
-	unsigned char	*p_char;
-	size_t			i;
+	matrix_map	*map;
 
-	i = 0;
-	p_char = (unsigned char *)s;
-	while (i < n)
+	map = (matrix_map *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
-		p_char[i] = (unsigned char)c;
-		i++;
+		mlx_close_window(map->mlx);
+		mlx_terminate(map->mlx);
+		ft_free_matrix(map);
+		exit(1);
 	}
-	return (s);
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:22:35 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 16:25:16 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:43:06 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,36 @@ int	*ft_get_s(matrix_point initial, matrix_point final)
 	return (s);
 }
 
-long	ft_get_hexadecimal(char *char_map, int *i)
+void	ft_advance_if(char *char_map, int *i)
 {
-	long	hex;
-	int	sign;
-
-	hex = 0;
-	sign = 1;
+	if (!char_map)
+		return ;
 	if (char_map[*i] && char_map[*i] == ',')
 		(*i)++;
 	if (char_map[*i] && char_map[*i] == '0')
 		(*i)++;
 	if (char_map[*i] && char_map[*i] == 'x')
 		(*i)++;
+	return ;
+}
+
+long	ft_get_hexadecimal(char *char_map, int *i)
+{
+	long	hex;
+	int		sign;
+
+	hex = 0;
+	sign = 1;
+	ft_advance_if(char_map, i);
 	if (char_map[*i] && (char_map[*i] == '-' || char_map[*i] == '+'))
 	{
 		if (char_map[*i] == '-')
 			sign = -1;
 		(*i)++;
 	}
-	while (char_map[*i] && ((char_map[*i] >= '0' && char_map[*i] <= '9') || (char_map[*i] >= 'A' && char_map[*i] <= 'Z') || (char_map[*i] >= 'a' && char_map[*i] <= 'z')))
+	while (char_map[*i] && ((char_map[*i] >= '0' && char_map[*i] <= '9')
+			|| (char_map[*i] >= 'A' && char_map[*i] <= 'Z')
+			|| (char_map[*i] >= 'a' && char_map[*i] <= 'z')))
 	{
 		if (char_map[*i] >= '0' && char_map[*i] <= '9')
 			hex = hex * 16 + (char_map[*i] - '0');
@@ -76,6 +86,5 @@ long	ft_get_hexadecimal(char *char_map, int *i)
 			hex = hex * 16 + (char_map[*i] - 'a' + 10);
 		(*i)++;
 	}
-	ft_printf("El hexadecimal es %x\n", hex * sign);
 	return (hex * sign);
 }

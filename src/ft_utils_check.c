@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_check_format.c                               :+:      :+:    :+:   */
+/*   ft_utils_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:15:00 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/13 16:26:16 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:10:15 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*ft_strdup(char *s)
 
 char	*ft_substr(char *s, int start, int len)
 {
-	int	i;
-	int	str_len;
+	int		i;
+	int		str_len;
 	char	*p;
 
 	i = 0;
@@ -89,8 +89,8 @@ char	*ft_strjoin(char *s1, char const *s2)
 	char	*p;
 	char	*cs1;
 	char	*cs2;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -110,20 +110,4 @@ char	*ft_strjoin(char *s1, char const *s2)
 		p[i++] = cs2[j++];
 	p[i] = '\0';
 	return (p);
-}
-
-int	ft_strcmp(char *str, char *str2)
-{
-	int	i;
-
-	if (!str || !str2)
-		return (-1);
-	i = 0;
-	while (str[i] && str2[i])
-	{
-		if (str[i] != str2[i])
-			return (str[i] - str2[i]);
-		i++;
-	}
-	return (str[i] - str2[i]);
 }
