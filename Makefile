@@ -6,12 +6,12 @@
 #    By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 15:49:58 by carlopez          #+#    #+#              #
-#    Updated: 2025/02/27 20:39:16 by carlopez         ###   ########.fr        #
+#    Updated: 2025/03/19 12:11:10 by carlopez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 MLXFLAGS = -g -ldl -lglfw -lm -pthread
 NAME = fdf
 

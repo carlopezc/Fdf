@@ -6,14 +6,14 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:59:02 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:05:25 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:08:45 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
 void	draw_horizontal(mlx_image_t *img,
-	matrix_point initial, matrix_point final)
+	t_matrix_point initial, t_matrix_point final)
 {
 	int	*s;
 	int	error;
@@ -43,7 +43,7 @@ void	draw_horizontal(mlx_image_t *img,
 }
 
 void	draw_vertical(mlx_image_t *img,
-	matrix_point initial, matrix_point final)
+	t_matrix_point initial, t_matrix_point final)
 {
 	int	*s;
 	int	error;
@@ -72,7 +72,8 @@ void	draw_vertical(mlx_image_t *img,
 	return (free(s));
 }
 
-void	ft_print_line(matrix_map *map, matrix_point initial, matrix_point final)
+void	ft_print_line(t_matrix_map *map,
+		t_matrix_point initial, t_matrix_point final)
 {
 	ft_zoom(&final, &initial, map);
 	ft_isometric(&final, &initial);
@@ -80,7 +81,6 @@ void	ft_print_line(matrix_map *map, matrix_point initial, matrix_point final)
 	ft_control_limit(&final);
 	if (ft_abs(final.y - initial.y) < ft_abs(final.x - initial.x))
 	{
-		//si es mas ancho que alto el recorrido
 		if (initial.x > final.x)
 			draw_horizontal(map->img, final, initial);
 		else
@@ -88,7 +88,6 @@ void	ft_print_line(matrix_map *map, matrix_point initial, matrix_point final)
 	}
 	else
 	{
-		//si es mas alto que ancho el recorrido
 		if (initial.y > final.y)
 			draw_vertical(map->img, final, initial);
 		else
@@ -97,11 +96,11 @@ void	ft_print_line(matrix_map *map, matrix_point initial, matrix_point final)
 	return ;
 }
 
-void	bresenham_algorithm(matrix_map *map)
+void	bresenham_algorithm(t_matrix_map *map)
 {
 	int				x;
 	int				y;
-	matrix_point	**point;
+	t_matrix_point	**point;
 
 	y = 0;
 	x = 0;

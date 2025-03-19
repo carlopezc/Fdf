@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:06 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 21:21:34 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:00:06 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ft_error_message(char *str)
 	return ;
 }
 
-void	ft_free_matrix(matrix_map *map)
+void	ft_free_matrix(t_matrix_map *map)
 {
-	matrix_point	**point;
+	t_matrix_point	**point;
 	int				i;
 
 	if (!map)
@@ -56,7 +56,7 @@ void	ft_free_matrix(matrix_map *map)
 int	main(int argc, char **argv)
 {
 	int			fd;
-	matrix_map	*map;
+	t_matrix_map	*map;
 	char		*char_map;
 
 	map = NULL;

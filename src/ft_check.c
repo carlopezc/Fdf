@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:59 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:28:52 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:02:46 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_check_digits(char *initial_map)
 			&& (initial_map[i] == '-' || initial_map[i] == '+'))
 			i++;
 		if (initial_map[i] && (initial_map[i] > '9' || initial_map[i] < '0'))
-			return (ft_printf("Error en los primeros numeros\n"), 0);
+			return (0);
 		while (initial_map[i]
 			&& (initial_map[i] <= '9' && initial_map[i] >= '0'))
 			i++;

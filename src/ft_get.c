@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:22:35 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 19:43:06 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:05:06 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_char_map(int fd, char **final_map)
 	return (*final_map);
 }
 
-int	*ft_get_s(matrix_point initial, matrix_point final)
+int	*ft_get_s(t_matrix_point initial, t_matrix_point final)
 {
 	int	*s;
 

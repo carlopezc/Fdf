@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:51:16 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 19:45:54 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:04:35 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,20 @@ int	ft_fill_number(char *char_map, int *i)
 	return (sign * number);
 }
 
-void	ft_fill_line(char *char_map, matrix_map *map, int i, int *fix)
+void	ft_fill_line(char *char_map, t_matrix_map *map, int i, int *fix)
 {
 	int	x;
 
 	x = 0;
-	ft_printf("Entra en fill line\n");
 	while (x < map->width)
 	{
 		(map->point)[i][x].x = x;
 		(map->point)[i][x].y = i;
-		ft_printf("Hasta aqui bien \n");
 		(map->point)[i][x].h = ft_fill_number(char_map, fix);
 		if (char_map[*fix] && char_map[*fix] == ',')
-		{
-			ft_printf("Rellena con color que le paso\n");
 			ft_trgb_rgba(char_map, fix, &(map->point)[i][x]);
-		}
 		else
-		{
-			ft_printf("Rellena con rojo creo\n");
 			map->point[i][x].colour = 0xFF0000FF;
-		}
 		x++;
 	}
 	return ;

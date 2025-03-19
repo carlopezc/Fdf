@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:25:06 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:49:56 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:03:04 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	ft_count_rows(char *char_map)
 		if (char_map[i] != '\n')
 		{
 			rows++;
-			ft_printf("Rows es %i\n", rows);
 			i++;
 		}
 		while (char_map[i] && char_map[i] != '\n')

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:10:26 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 17:28:24 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:05:49 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
-	matrix_map	*map;
+	t_matrix_map	*map;
 
-	map = (matrix_map *)param;
+	map = (t_matrix_map *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		mlx_close_window(map->mlx);

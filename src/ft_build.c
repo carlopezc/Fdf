@@ -6,13 +6,13 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:16:32 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:42:31 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:10:08 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-void	ft_build_lines(char *char_map, matrix_map *map)
+void	ft_build_lines(char *char_map, t_matrix_map *map)
 {
 	int	j;
 	int	fix;
@@ -21,8 +21,8 @@ void	ft_build_lines(char *char_map, matrix_map *map)
 	fix = 0;
 	while (j < map->height)
 	{
-		(map->point)[j] = (matrix_point *)
-			malloc(map->width * sizeof(matrix_point));
+		(map->point)[j] = (t_matrix_point *)
+			malloc(map->width * sizeof(t_matrix_point));
 		if (!(map->point)[j])
 			return ;
 		ft_fill_line(char_map, map, j, &fix);
@@ -31,18 +31,19 @@ void	ft_build_lines(char *char_map, matrix_map *map)
 	return ;
 }
 
-matrix_map	*ft_build_map(char *char_map)
+t_matrix_map	*ft_build_map(char *char_map)
 {
-	matrix_point	**map_points;
-	matrix_map		*map;
-	int				rows;
-	int				columns;
+	t_matrix_point		**map_points;
+	t_matrix_map		*map;
+	int					rows;
+	int					columns;
 
-	map = (matrix_map *)malloc(sizeof(matrix_map));
+	map = (t_matrix_map *)malloc(sizeof(t_matrix_map));
 	if (!map)
 		return (free(char_map), NULL);
 	rows = ft_count_rows(char_map);
-	map_points = (matrix_point **)malloc((rows + 1) * sizeof(matrix_point *));
+	map_points = (t_matrix_point **)malloc((rows + 1)
+			* sizeof(t_matrix_point *));
 	if (!map_points)
 		return (free(char_map), NULL);
 	map_points[rows] = NULL;

@@ -6,7 +6,7 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 20:03:56 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:39:39 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:08:29 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_abs(int value)
 	return (value);
 }
 
-void	ft_mlx(matrix_map *map)
+void	ft_mlx(t_matrix_map *map)
 {
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
 	mlx_key_hook(map->mlx, my_keyhook, map);
@@ -29,7 +29,8 @@ void	ft_mlx(matrix_map *map)
 	return ;
 }
 
-void	ft_zoom(matrix_point *final, matrix_point *initial, matrix_map *map)
+void	ft_zoom(t_matrix_point *final,
+		t_matrix_point *initial, t_matrix_map *map)
 {
 	if (final)
 	{
@@ -59,12 +60,11 @@ void	ft_free_map(int **map)
 	return ;
 }
 
-void	ft_isometric(matrix_point *final, matrix_point *initial)
+void	ft_isometric(t_matrix_point *final, t_matrix_point *initial)
 {
 	double	angle;
 	double	prev;
 
-	//30 grados en radianes
 	angle = 0.523599;
 	if (final)
 	{

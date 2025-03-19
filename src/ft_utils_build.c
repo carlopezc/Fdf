@@ -6,13 +6,13 @@
 /*   By: carlopez <carlopez@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:40:17 by carlopez          #+#    #+#             */
-/*   Updated: 2025/02/27 20:52:56 by carlopez         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:06:59 by carlopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-void	ft_control_limit(matrix_point *point)
+void	ft_control_limit(t_matrix_point *point)
 {
 	if (!point)
 		return ;
@@ -27,7 +27,7 @@ void	ft_control_limit(matrix_point *point)
 	return ;
 }
 
-void	ft_trgb_rgba(char *char_map, int *fix, matrix_point *point)
+void	ft_trgb_rgba(char *char_map, int *fix, t_matrix_point *point)
 {
 	uint8_t	r;
 	uint8_t	g;
