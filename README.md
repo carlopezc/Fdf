@@ -34,5 +34,3 @@ This project was my first dive into **graphics programming** using the `MLX42` l
     ./fdf maps/test_maps/pylone.fdf
     ```
     (You can use any of the maps from `maps` folder).
-
-4.  Use the keyboard controls (e.g., arrows, +, -, etc.) to interact with the model.
